@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Dashboard</title>
+
+     <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Dashboard</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="city">Enter City Name:</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Get weather</button>
+            </div>
+        </form>
+        
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        
+        {% if weather %}
+            <h2>Weather in {{ weather.name }}</h2>
+            <p>Temperature: {{ weather.main.temp }} °C</p>
+            <p>Humidity: {{ weather.main.humidity }}%</p>
+            <p>Condition: {{ weather.weather[0].description }}</p>
+{% endif %}
+    </div>
+</body>
+</html>
